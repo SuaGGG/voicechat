@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../lib/libvoicechat_proto.a CMakeFiles/voicechat_proto.dir/voice_message.pb.cc.o
+/usr/bin/ranlib ../lib/libvoicechat_proto.a
