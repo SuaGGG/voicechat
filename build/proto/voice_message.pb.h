@@ -74,16 +74,16 @@ PROTOBUF_NAMESPACE_CLOSE
 namespace voicechat {
 
 enum ControlMessage_MessageType : int {
-  ControlMessage_MessageType_JOIN = 0,
-  ControlMessage_MessageType_LEAVE = 1,
-  ControlMessage_MessageType_MUTE = 2,
-  ControlMessage_MessageType_UNMUTE = 3,
+  ControlMessage_MessageType_UNKNOWN = 0,
+  ControlMessage_MessageType_JOIN = 1,
+  ControlMessage_MessageType_LEAVE = 2,
+  ControlMessage_MessageType_MUTE = 3,
   ControlMessage_MessageType_LIST_ROOMS = 4,
   ControlMessage_MessageType_ControlMessage_MessageType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ControlMessage_MessageType_ControlMessage_MessageType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool ControlMessage_MessageType_IsValid(int value);
-constexpr ControlMessage_MessageType ControlMessage_MessageType_MessageType_MIN = ControlMessage_MessageType_JOIN;
+constexpr ControlMessage_MessageType ControlMessage_MessageType_MessageType_MIN = ControlMessage_MessageType_UNKNOWN;
 constexpr ControlMessage_MessageType ControlMessage_MessageType_MessageType_MAX = ControlMessage_MessageType_LIST_ROOMS;
 constexpr int ControlMessage_MessageType_MessageType_ARRAYSIZE = ControlMessage_MessageType_MessageType_MAX + 1;
 
@@ -102,13 +102,14 @@ inline bool ControlMessage_MessageType_Parse(
     ControlMessage_MessageType_descriptor(), name, value);
 }
 enum ServerResponse_Status : int {
-  ServerResponse_Status_SUCCESS = 0,
-  ServerResponse_Status_ERROR = 1,
+  ServerResponse_Status_UNKNOWN = 0,
+  ServerResponse_Status_SUCCESS = 1,
+  ServerResponse_Status_ERROR = 2,
   ServerResponse_Status_ServerResponse_Status_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   ServerResponse_Status_ServerResponse_Status_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool ServerResponse_Status_IsValid(int value);
-constexpr ServerResponse_Status ServerResponse_Status_Status_MIN = ServerResponse_Status_SUCCESS;
+constexpr ServerResponse_Status ServerResponse_Status_Status_MIN = ServerResponse_Status_UNKNOWN;
 constexpr ServerResponse_Status ServerResponse_Status_Status_MAX = ServerResponse_Status_ERROR;
 constexpr int ServerResponse_Status_Status_ARRAYSIZE = ServerResponse_Status_Status_MAX + 1;
 
@@ -241,37 +242,12 @@ class AudioData PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kAudioPayloadFieldNumber = 1,
-    kUserIdFieldNumber = 3,
-    kTimestampFieldNumber = 2,
+    kUserIdFieldNumber = 1,
+    kAudioPayloadFieldNumber = 2,
+    kTimestampFieldNumber = 3,
     kSequenceNumberFieldNumber = 4,
   };
-  // bytes audio_payload = 1;
-  void clear_audio_payload();
-  const std::string& audio_payload() const;
-  void set_audio_payload(const std::string& value);
-  void set_audio_payload(std::string&& value);
-  void set_audio_payload(const char* value);
-  void set_audio_payload(const void* value, size_t size);
-  std::string* mutable_audio_payload();
-  std::string* release_audio_payload();
-  void set_allocated_audio_payload(std::string* audio_payload);
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  std::string* unsafe_arena_release_audio_payload();
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_audio_payload(
-      std::string* audio_payload);
-  private:
-  const std::string& _internal_audio_payload() const;
-  void _internal_set_audio_payload(const std::string& value);
-  std::string* _internal_mutable_audio_payload();
-  public:
-
-  // string user_id = 3;
+  // string user_id = 1;
   void clear_user_id();
   const std::string& user_id() const;
   void set_user_id(const std::string& value);
@@ -296,7 +272,32 @@ class AudioData PROTOBUF_FINAL :
   std::string* _internal_mutable_user_id();
   public:
 
-  // uint64 timestamp = 2;
+  // string audio_payload = 2;
+  void clear_audio_payload();
+  const std::string& audio_payload() const;
+  void set_audio_payload(const std::string& value);
+  void set_audio_payload(std::string&& value);
+  void set_audio_payload(const char* value);
+  void set_audio_payload(const char* value, size_t size);
+  std::string* mutable_audio_payload();
+  std::string* release_audio_payload();
+  void set_allocated_audio_payload(std::string* audio_payload);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_audio_payload();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_audio_payload(
+      std::string* audio_payload);
+  private:
+  const std::string& _internal_audio_payload() const;
+  void _internal_set_audio_payload(const std::string& value);
+  std::string* _internal_mutable_audio_payload();
+  public:
+
+  // uint64 timestamp = 3;
   void clear_timestamp();
   ::PROTOBUF_NAMESPACE_ID::uint64 timestamp() const;
   void set_timestamp(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -321,8 +322,8 @@ class AudioData PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr audio_payload_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_id_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr audio_payload_;
   ::PROTOBUF_NAMESPACE_ID::uint64 timestamp_;
   ::PROTOBUF_NAMESPACE_ID::uint32 sequence_number_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -441,14 +442,14 @@ class ControlMessage PROTOBUF_FINAL :
   // nested types ----------------------------------------------------
 
   typedef ControlMessage_MessageType MessageType;
+  static constexpr MessageType UNKNOWN =
+    ControlMessage_MessageType_UNKNOWN;
   static constexpr MessageType JOIN =
     ControlMessage_MessageType_JOIN;
   static constexpr MessageType LEAVE =
     ControlMessage_MessageType_LEAVE;
   static constexpr MessageType MUTE =
     ControlMessage_MessageType_MUTE;
-  static constexpr MessageType UNMUTE =
-    ControlMessage_MessageType_UNMUTE;
   static constexpr MessageType LIST_ROOMS =
     ControlMessage_MessageType_LIST_ROOMS;
   static inline bool MessageType_IsValid(int value) {
@@ -481,8 +482,8 @@ class ControlMessage PROTOBUF_FINAL :
   enum : int {
     kUserIdFieldNumber = 2,
     kRoomIdFieldNumber = 3,
-    kMessageFieldNumber = 4,
     kTypeFieldNumber = 1,
+    kRequestIdFieldNumber = 4,
   };
   // string user_id = 2;
   void clear_user_id();
@@ -534,31 +535,6 @@ class ControlMessage PROTOBUF_FINAL :
   std::string* _internal_mutable_room_id();
   public:
 
-  // string message = 4;
-  void clear_message();
-  const std::string& message() const;
-  void set_message(const std::string& value);
-  void set_message(std::string&& value);
-  void set_message(const char* value);
-  void set_message(const char* value, size_t size);
-  std::string* mutable_message();
-  std::string* release_message();
-  void set_allocated_message(std::string* message);
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  std::string* unsafe_arena_release_message();
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_message(
-      std::string* message);
-  private:
-  const std::string& _internal_message() const;
-  void _internal_set_message(const std::string& value);
-  std::string* _internal_mutable_message();
-  public:
-
   // .voicechat.ControlMessage.MessageType type = 1;
   void clear_type();
   ::voicechat::ControlMessage_MessageType type() const;
@@ -566,6 +542,15 @@ class ControlMessage PROTOBUF_FINAL :
   private:
   ::voicechat::ControlMessage_MessageType _internal_type() const;
   void _internal_set_type(::voicechat::ControlMessage_MessageType value);
+  public:
+
+  // uint32 request_id = 4;
+  void clear_request_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 request_id() const;
+  void set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_request_id() const;
+  void _internal_set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:voicechat.ControlMessage)
@@ -577,8 +562,8 @@ class ControlMessage PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_id_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr room_id_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
   int type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 request_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_voice_5fmessage_2eproto;
 };
@@ -695,6 +680,8 @@ class ServerResponse PROTOBUF_FINAL :
   // nested types ----------------------------------------------------
 
   typedef ServerResponse_Status Status;
+  static constexpr Status UNKNOWN =
+    ServerResponse_Status_UNKNOWN;
   static constexpr Status SUCCESS =
     ServerResponse_Status_SUCCESS;
   static constexpr Status ERROR =
@@ -729,6 +716,7 @@ class ServerResponse PROTOBUF_FINAL :
   enum : int {
     kMessageFieldNumber = 2,
     kStatusFieldNumber = 1,
+    kRequestIdFieldNumber = 3,
   };
   // string message = 2;
   void clear_message();
@@ -764,6 +752,15 @@ class ServerResponse PROTOBUF_FINAL :
   void _internal_set_status(::voicechat::ServerResponse_Status value);
   public:
 
+  // uint32 request_id = 3;
+  void clear_request_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 request_id() const;
+  void set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_request_id() const;
+  void _internal_set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:voicechat.ServerResponse)
  private:
   class _Internal;
@@ -773,6 +770,7 @@ class ServerResponse PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
   int status_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 request_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_voice_5fmessage_2eproto;
 };
@@ -787,108 +785,7 @@ class ServerResponse PROTOBUF_FINAL :
 #endif  // __GNUC__
 // AudioData
 
-// bytes audio_payload = 1;
-inline void AudioData::clear_audio_payload() {
-  audio_payload_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline const std::string& AudioData::audio_payload() const {
-  // @@protoc_insertion_point(field_get:voicechat.AudioData.audio_payload)
-  return _internal_audio_payload();
-}
-inline void AudioData::set_audio_payload(const std::string& value) {
-  _internal_set_audio_payload(value);
-  // @@protoc_insertion_point(field_set:voicechat.AudioData.audio_payload)
-}
-inline std::string* AudioData::mutable_audio_payload() {
-  // @@protoc_insertion_point(field_mutable:voicechat.AudioData.audio_payload)
-  return _internal_mutable_audio_payload();
-}
-inline const std::string& AudioData::_internal_audio_payload() const {
-  return audio_payload_.Get();
-}
-inline void AudioData::_internal_set_audio_payload(const std::string& value) {
-  
-  audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
-}
-inline void AudioData::set_audio_payload(std::string&& value) {
-  
-  audio_payload_.Set(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:voicechat.AudioData.audio_payload)
-}
-inline void AudioData::set_audio_payload(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArena());
-  // @@protoc_insertion_point(field_set_char:voicechat.AudioData.audio_payload)
-}
-inline void AudioData::set_audio_payload(const void* value,
-    size_t size) {
-  
-  audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:voicechat.AudioData.audio_payload)
-}
-inline std::string* AudioData::_internal_mutable_audio_payload() {
-  
-  return audio_payload_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline std::string* AudioData::release_audio_payload() {
-  // @@protoc_insertion_point(field_release:voicechat.AudioData.audio_payload)
-  return audio_payload_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void AudioData::set_allocated_audio_payload(std::string* audio_payload) {
-  if (audio_payload != nullptr) {
-    
-  } else {
-    
-  }
-  audio_payload_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), audio_payload,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:voicechat.AudioData.audio_payload)
-}
-inline std::string* AudioData::unsafe_arena_release_audio_payload() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:voicechat.AudioData.audio_payload)
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  
-  return audio_payload_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      GetArena());
-}
-inline void AudioData::unsafe_arena_set_allocated_audio_payload(
-    std::string* audio_payload) {
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  if (audio_payload != nullptr) {
-    
-  } else {
-    
-  }
-  audio_payload_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      audio_payload, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:voicechat.AudioData.audio_payload)
-}
-
-// uint64 timestamp = 2;
-inline void AudioData::clear_timestamp() {
-  timestamp_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 AudioData::_internal_timestamp() const {
-  return timestamp_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 AudioData::timestamp() const {
-  // @@protoc_insertion_point(field_get:voicechat.AudioData.timestamp)
-  return _internal_timestamp();
-}
-inline void AudioData::_internal_set_timestamp(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  timestamp_ = value;
-}
-inline void AudioData::set_timestamp(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  _internal_set_timestamp(value);
-  // @@protoc_insertion_point(field_set:voicechat.AudioData.timestamp)
-}
-
-// string user_id = 3;
+// string user_id = 1;
 inline void AudioData::clear_user_id() {
   user_id_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -967,6 +864,107 @@ inline void AudioData::unsafe_arena_set_allocated_user_id(
   user_id_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       user_id, GetArena());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:voicechat.AudioData.user_id)
+}
+
+// string audio_payload = 2;
+inline void AudioData::clear_audio_payload() {
+  audio_payload_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& AudioData::audio_payload() const {
+  // @@protoc_insertion_point(field_get:voicechat.AudioData.audio_payload)
+  return _internal_audio_payload();
+}
+inline void AudioData::set_audio_payload(const std::string& value) {
+  _internal_set_audio_payload(value);
+  // @@protoc_insertion_point(field_set:voicechat.AudioData.audio_payload)
+}
+inline std::string* AudioData::mutable_audio_payload() {
+  // @@protoc_insertion_point(field_mutable:voicechat.AudioData.audio_payload)
+  return _internal_mutable_audio_payload();
+}
+inline const std::string& AudioData::_internal_audio_payload() const {
+  return audio_payload_.Get();
+}
+inline void AudioData::_internal_set_audio_payload(const std::string& value) {
+  
+  audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void AudioData::set_audio_payload(std::string&& value) {
+  
+  audio_payload_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:voicechat.AudioData.audio_payload)
+}
+inline void AudioData::set_audio_payload(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:voicechat.AudioData.audio_payload)
+}
+inline void AudioData::set_audio_payload(const char* value,
+    size_t size) {
+  
+  audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:voicechat.AudioData.audio_payload)
+}
+inline std::string* AudioData::_internal_mutable_audio_payload() {
+  
+  return audio_payload_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* AudioData::release_audio_payload() {
+  // @@protoc_insertion_point(field_release:voicechat.AudioData.audio_payload)
+  return audio_payload_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void AudioData::set_allocated_audio_payload(std::string* audio_payload) {
+  if (audio_payload != nullptr) {
+    
+  } else {
+    
+  }
+  audio_payload_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), audio_payload,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:voicechat.AudioData.audio_payload)
+}
+inline std::string* AudioData::unsafe_arena_release_audio_payload() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:voicechat.AudioData.audio_payload)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return audio_payload_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void AudioData::unsafe_arena_set_allocated_audio_payload(
+    std::string* audio_payload) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (audio_payload != nullptr) {
+    
+  } else {
+    
+  }
+  audio_payload_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      audio_payload, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:voicechat.AudioData.audio_payload)
+}
+
+// uint64 timestamp = 3;
+inline void AudioData::clear_timestamp() {
+  timestamp_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 AudioData::_internal_timestamp() const {
+  return timestamp_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 AudioData::timestamp() const {
+  // @@protoc_insertion_point(field_get:voicechat.AudioData.timestamp)
+  return _internal_timestamp();
+}
+inline void AudioData::_internal_set_timestamp(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  timestamp_ = value;
+}
+inline void AudioData::set_timestamp(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_timestamp(value);
+  // @@protoc_insertion_point(field_set:voicechat.AudioData.timestamp)
 }
 
 // uint32 sequence_number = 4;
@@ -1175,85 +1173,24 @@ inline void ControlMessage::unsafe_arena_set_allocated_room_id(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:voicechat.ControlMessage.room_id)
 }
 
-// string message = 4;
-inline void ControlMessage::clear_message() {
-  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+// uint32 request_id = 4;
+inline void ControlMessage::clear_request_id() {
+  request_id_ = 0u;
 }
-inline const std::string& ControlMessage::message() const {
-  // @@protoc_insertion_point(field_get:voicechat.ControlMessage.message)
-  return _internal_message();
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ControlMessage::_internal_request_id() const {
+  return request_id_;
 }
-inline void ControlMessage::set_message(const std::string& value) {
-  _internal_set_message(value);
-  // @@protoc_insertion_point(field_set:voicechat.ControlMessage.message)
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ControlMessage::request_id() const {
+  // @@protoc_insertion_point(field_get:voicechat.ControlMessage.request_id)
+  return _internal_request_id();
 }
-inline std::string* ControlMessage::mutable_message() {
-  // @@protoc_insertion_point(field_mutable:voicechat.ControlMessage.message)
-  return _internal_mutable_message();
-}
-inline const std::string& ControlMessage::_internal_message() const {
-  return message_.Get();
-}
-inline void ControlMessage::_internal_set_message(const std::string& value) {
+inline void ControlMessage::_internal_set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
-  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+  request_id_ = value;
 }
-inline void ControlMessage::set_message(std::string&& value) {
-  
-  message_.Set(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:voicechat.ControlMessage.message)
-}
-inline void ControlMessage::set_message(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArena());
-  // @@protoc_insertion_point(field_set_char:voicechat.ControlMessage.message)
-}
-inline void ControlMessage::set_message(const char* value,
-    size_t size) {
-  
-  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:voicechat.ControlMessage.message)
-}
-inline std::string* ControlMessage::_internal_mutable_message() {
-  
-  return message_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline std::string* ControlMessage::release_message() {
-  // @@protoc_insertion_point(field_release:voicechat.ControlMessage.message)
-  return message_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void ControlMessage::set_allocated_message(std::string* message) {
-  if (message != nullptr) {
-    
-  } else {
-    
-  }
-  message_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), message,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:voicechat.ControlMessage.message)
-}
-inline std::string* ControlMessage::unsafe_arena_release_message() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:voicechat.ControlMessage.message)
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  
-  return message_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      GetArena());
-}
-inline void ControlMessage::unsafe_arena_set_allocated_message(
-    std::string* message) {
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  if (message != nullptr) {
-    
-  } else {
-    
-  }
-  message_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      message, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:voicechat.ControlMessage.message)
+inline void ControlMessage::set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_request_id(value);
+  // @@protoc_insertion_point(field_set:voicechat.ControlMessage.request_id)
 }
 
 // -------------------------------------------------------------------
@@ -1359,6 +1296,26 @@ inline void ServerResponse::unsafe_arena_set_allocated_message(
   message_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       message, GetArena());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:voicechat.ServerResponse.message)
+}
+
+// uint32 request_id = 3;
+inline void ServerResponse::clear_request_id() {
+  request_id_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ServerResponse::_internal_request_id() const {
+  return request_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ServerResponse::request_id() const {
+  // @@protoc_insertion_point(field_get:voicechat.ServerResponse.request_id)
+  return _internal_request_id();
+}
+inline void ServerResponse::_internal_set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  request_id_ = value;
+}
+inline void ServerResponse::set_request_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_request_id(value);
+  // @@protoc_insertion_point(field_set:voicechat.ServerResponse.request_id)
 }
 
 #ifdef __GNUC__

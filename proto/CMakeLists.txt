@@ -1,6 +1,12 @@
-# 生成Protocol Buffers代码
-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS
+# 定义proto文件列表
+set(PROTO_FILES
     voice_message.proto
+)
+
+# 生成Protocol Buffers代码
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES}
+    PROTOC_OUT_DIR "${CMAKE_CURRENT_BINARY_DIR}"
+    PROTOC_OPTIONS "--experimental_allow_proto3_optional"
 )
 
 # 创建Protocol Buffers库

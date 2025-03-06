@@ -80,9 +80,9 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_voice_5fmessage_2eproto::offse
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::voicechat::AudioData, user_id_),
   PROTOBUF_FIELD_OFFSET(::voicechat::AudioData, audio_payload_),
   PROTOBUF_FIELD_OFFSET(::voicechat::AudioData, timestamp_),
-  PROTOBUF_FIELD_OFFSET(::voicechat::AudioData, user_id_),
   PROTOBUF_FIELD_OFFSET(::voicechat::AudioData, sequence_number_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::voicechat::ControlMessage, _internal_metadata_),
@@ -92,7 +92,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_voice_5fmessage_2eproto::offse
   PROTOBUF_FIELD_OFFSET(::voicechat::ControlMessage, type_),
   PROTOBUF_FIELD_OFFSET(::voicechat::ControlMessage, user_id_),
   PROTOBUF_FIELD_OFFSET(::voicechat::ControlMessage, room_id_),
-  PROTOBUF_FIELD_OFFSET(::voicechat::ControlMessage, message_),
+  PROTOBUF_FIELD_OFFSET(::voicechat::ControlMessage, request_id_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::voicechat::ServerResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -100,6 +100,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_voice_5fmessage_2eproto::offse
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::voicechat::ServerResponse, status_),
   PROTOBUF_FIELD_OFFSET(::voicechat::ServerResponse, message_),
+  PROTOBUF_FIELD_OFFSET(::voicechat::ServerResponse, request_id_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::voicechat::AudioData)},
@@ -115,17 +116,18 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_voice_5fmessage_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\023voice_message.proto\022\tvoicechat\"_\n\tAudi"
-  "oData\022\025\n\raudio_payload\030\001 \001(\014\022\021\n\ttimestam"
-  "p\030\002 \001(\004\022\017\n\007user_id\030\003 \001(\t\022\027\n\017sequence_num"
-  "ber\030\004 \001(\r\"\302\001\n\016ControlMessage\0223\n\004type\030\001 \001"
+  "oData\022\017\n\007user_id\030\001 \001(\t\022\025\n\raudio_payload\030"
+  "\002 \001(\t\022\021\n\ttimestamp\030\003 \001(\004\022\027\n\017sequence_num"
+  "ber\030\004 \001(\r\"\306\001\n\016ControlMessage\0223\n\004type\030\001 \001"
   "(\0162%.voicechat.ControlMessage.MessageTyp"
-  "e\022\017\n\007user_id\030\002 \001(\t\022\017\n\007room_id\030\003 \001(\t\022\017\n\007m"
-  "essage\030\004 \001(\t\"H\n\013MessageType\022\010\n\004JOIN\020\000\022\t\n"
-  "\005LEAVE\020\001\022\010\n\004MUTE\020\002\022\n\n\006UNMUTE\020\003\022\016\n\nLIST_R"
-  "OOMS\020\004\"u\n\016ServerResponse\0220\n\006status\030\001 \001(\016"
-  "2 .voicechat.ServerResponse.Status\022\017\n\007me"
-  "ssage\030\002 \001(\t\" \n\006Status\022\013\n\007SUCCESS\020\000\022\t\n\005ER"
-  "ROR\020\001b\006proto3"
+  "e\022\017\n\007user_id\030\002 \001(\t\022\017\n\007room_id\030\003 \001(\t\022\022\n\nr"
+  "equest_id\030\004 \001(\r\"I\n\013MessageType\022\013\n\007UNKNOW"
+  "N\020\000\022\010\n\004JOIN\020\001\022\t\n\005LEAVE\020\002\022\010\n\004MUTE\020\003\022\016\n\nLI"
+  "ST_ROOMS\020\004\"\226\001\n\016ServerResponse\0220\n\006status\030"
+  "\001 \001(\0162 .voicechat.ServerResponse.Status\022"
+  "\017\n\007message\030\002 \001(\t\022\022\n\nrequest_id\030\003 \001(\r\"-\n\006"
+  "Status\022\013\n\007UNKNOWN\020\000\022\013\n\007SUCCESS\020\001\022\t\n\005ERRO"
+  "R\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_voice_5fmessage_2eproto_deps[1] = {
 };
@@ -136,7 +138,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_voi
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_voice_5fmessage_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_voice_5fmessage_2eproto = {
-  false, false, descriptor_table_protodef_voice_5fmessage_2eproto, "voice_message.proto", 453,
+  false, false, descriptor_table_protodef_voice_5fmessage_2eproto, "voice_message.proto", 491,
   &descriptor_table_voice_5fmessage_2eproto_once, descriptor_table_voice_5fmessage_2eproto_sccs, descriptor_table_voice_5fmessage_2eproto_deps, 3, 0,
   schemas, file_default_instances, TableStruct_voice_5fmessage_2eproto::offsets,
   file_level_metadata_voice_5fmessage_2eproto, 3, file_level_enum_descriptors_voice_5fmessage_2eproto, file_level_service_descriptors_voice_5fmessage_2eproto,
@@ -163,10 +165,10 @@ bool ControlMessage_MessageType_IsValid(int value) {
 }
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr ControlMessage_MessageType ControlMessage::UNKNOWN;
 constexpr ControlMessage_MessageType ControlMessage::JOIN;
 constexpr ControlMessage_MessageType ControlMessage::LEAVE;
 constexpr ControlMessage_MessageType ControlMessage::MUTE;
-constexpr ControlMessage_MessageType ControlMessage::UNMUTE;
 constexpr ControlMessage_MessageType ControlMessage::LIST_ROOMS;
 constexpr ControlMessage_MessageType ControlMessage::MessageType_MIN;
 constexpr ControlMessage_MessageType ControlMessage::MessageType_MAX;
@@ -180,6 +182,7 @@ bool ServerResponse_Status_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -187,6 +190,7 @@ bool ServerResponse_Status_IsValid(int value) {
 }
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr ServerResponse_Status ServerResponse::UNKNOWN;
 constexpr ServerResponse_Status ServerResponse::SUCCESS;
 constexpr ServerResponse_Status ServerResponse::ERROR;
 constexpr ServerResponse_Status ServerResponse::Status_MIN;
@@ -211,14 +215,14 @@ AudioData::AudioData(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 AudioData::AudioData(const AudioData& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  audio_payload_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_audio_payload().empty()) {
-    audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_audio_payload(),
-      GetArena());
-  }
   user_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_user_id().empty()) {
     user_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_user_id(),
+      GetArena());
+  }
+  audio_payload_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_audio_payload().empty()) {
+    audio_payload_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_audio_payload(),
       GetArena());
   }
   ::memcpy(&timestamp_, &from.timestamp_,
@@ -229,8 +233,8 @@ AudioData::AudioData(const AudioData& from)
 
 void AudioData::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_AudioData_voice_5fmessage_2eproto.base);
-  audio_payload_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   user_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  audio_payload_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&timestamp_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&sequence_number_) -
       reinterpret_cast<char*>(&timestamp_)) + sizeof(sequence_number_));
@@ -244,8 +248,8 @@ AudioData::~AudioData() {
 
 void AudioData::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
-  audio_payload_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   user_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  audio_payload_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void AudioData::ArenaDtor(void* object) {
@@ -269,8 +273,8 @@ void AudioData::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  audio_payload_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   user_id_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  audio_payload_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::memset(&timestamp_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&sequence_number_) -
       reinterpret_cast<char*>(&timestamp_)) + sizeof(sequence_number_));
@@ -285,27 +289,28 @@ const char* AudioData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // bytes audio_payload = 1;
+      // string user_id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_audio_payload();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // uint64 timestamp = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          timestamp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string user_id = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_user_id();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "voicechat.AudioData.user_id"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string audio_payload = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_audio_payload();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "voicechat.AudioData.audio_payload"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 timestamp = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          timestamp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -344,26 +349,30 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bytes audio_payload = 1;
-  if (this->audio_payload().size() > 0) {
-    target = stream->WriteBytesMaybeAliased(
-        1, this->_internal_audio_payload(), target);
-  }
-
-  // uint64 timestamp = 2;
-  if (this->timestamp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(2, this->_internal_timestamp(), target);
-  }
-
-  // string user_id = 3;
+  // string user_id = 1;
   if (this->user_id().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_user_id().data(), static_cast<int>(this->_internal_user_id().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "voicechat.AudioData.user_id");
     target = stream->WriteStringMaybeAliased(
-        3, this->_internal_user_id(), target);
+        1, this->_internal_user_id(), target);
+  }
+
+  // string audio_payload = 2;
+  if (this->audio_payload().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_audio_payload().data(), static_cast<int>(this->_internal_audio_payload().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "voicechat.AudioData.audio_payload");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_audio_payload(), target);
+  }
+
+  // uint64 timestamp = 3;
+  if (this->timestamp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(3, this->_internal_timestamp(), target);
   }
 
   // uint32 sequence_number = 4;
@@ -388,21 +397,21 @@ size_t AudioData::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // bytes audio_payload = 1;
-  if (this->audio_payload().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-        this->_internal_audio_payload());
-  }
-
-  // string user_id = 3;
+  // string user_id = 1;
   if (this->user_id().size() > 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_user_id());
   }
 
-  // uint64 timestamp = 2;
+  // string audio_payload = 2;
+  if (this->audio_payload().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_audio_payload());
+  }
+
+  // uint64 timestamp = 3;
   if (this->timestamp() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
@@ -447,11 +456,11 @@ void AudioData::MergeFrom(const AudioData& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.audio_payload().size() > 0) {
-    _internal_set_audio_payload(from._internal_audio_payload());
-  }
   if (from.user_id().size() > 0) {
     _internal_set_user_id(from._internal_user_id());
+  }
+  if (from.audio_payload().size() > 0) {
+    _internal_set_audio_payload(from._internal_audio_payload());
   }
   if (from.timestamp() != 0) {
     _internal_set_timestamp(from._internal_timestamp());
@@ -482,8 +491,8 @@ bool AudioData::IsInitialized() const {
 void AudioData::InternalSwap(AudioData* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  audio_payload_.Swap(&other->audio_payload_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   user_id_.Swap(&other->user_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  audio_payload_.Swap(&other->audio_payload_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(AudioData, sequence_number_)
       + sizeof(AudioData::sequence_number_)
@@ -524,12 +533,9 @@ ControlMessage::ControlMessage(const ControlMessage& from)
     room_id_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_room_id(),
       GetArena());
   }
-  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_message().empty()) {
-    message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_message(),
-      GetArena());
-  }
-  type_ = from.type_;
+  ::memcpy(&type_, &from.type_,
+    static_cast<size_t>(reinterpret_cast<char*>(&request_id_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(request_id_));
   // @@protoc_insertion_point(copy_constructor:voicechat.ControlMessage)
 }
 
@@ -537,8 +543,9 @@ void ControlMessage::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ControlMessage_voice_5fmessage_2eproto.base);
   user_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   room_id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  type_ = 0;
+  ::memset(&type_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&request_id_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(request_id_));
 }
 
 ControlMessage::~ControlMessage() {
@@ -551,7 +558,6 @@ void ControlMessage::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   user_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   room_id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  message_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ControlMessage::ArenaDtor(void* object) {
@@ -577,8 +583,9 @@ void ControlMessage::Clear() {
 
   user_id_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   room_id_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  type_ = 0;
+  ::memset(&type_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&request_id_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(request_id_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -616,12 +623,10 @@ const char* ControlMessage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string message = 4;
+      // uint32 request_id = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          auto str = _internal_mutable_message();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "voicechat.ControlMessage.message"));
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          request_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -680,14 +685,10 @@ failure:
         3, this->_internal_room_id(), target);
   }
 
-  // string message = 4;
-  if (this->message().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "voicechat.ControlMessage.message");
-    target = stream->WriteStringMaybeAliased(
-        4, this->_internal_message(), target);
+  // uint32 request_id = 4;
+  if (this->request_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(4, this->_internal_request_id(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -720,17 +721,17 @@ size_t ControlMessage::ByteSizeLong() const {
         this->_internal_room_id());
   }
 
-  // string message = 4;
-  if (this->message().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_message());
-  }
-
   // .voicechat.ControlMessage.MessageType type = 1;
   if (this->type() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_type());
+  }
+
+  // uint32 request_id = 4;
+  if (this->request_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_request_id());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -770,11 +771,11 @@ void ControlMessage::MergeFrom(const ControlMessage& from) {
   if (from.room_id().size() > 0) {
     _internal_set_room_id(from._internal_room_id());
   }
-  if (from.message().size() > 0) {
-    _internal_set_message(from._internal_message());
-  }
   if (from.type() != 0) {
     _internal_set_type(from._internal_type());
+  }
+  if (from.request_id() != 0) {
+    _internal_set_request_id(from._internal_request_id());
   }
 }
 
@@ -801,8 +802,12 @@ void ControlMessage::InternalSwap(ControlMessage* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   user_id_.Swap(&other->user_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   room_id_.Swap(&other->room_id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  message_.Swap(&other->message_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  swap(type_, other->type_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ControlMessage, request_id_)
+      + sizeof(ControlMessage::request_id_)
+      - PROTOBUF_FIELD_OFFSET(ControlMessage, type_)>(
+          reinterpret_cast<char*>(&type_),
+          reinterpret_cast<char*>(&other->type_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ControlMessage::GetMetadata() const {
@@ -832,14 +837,18 @@ ServerResponse::ServerResponse(const ServerResponse& from)
     message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_message(),
       GetArena());
   }
-  status_ = from.status_;
+  ::memcpy(&status_, &from.status_,
+    static_cast<size_t>(reinterpret_cast<char*>(&request_id_) -
+    reinterpret_cast<char*>(&status_)) + sizeof(request_id_));
   // @@protoc_insertion_point(copy_constructor:voicechat.ServerResponse)
 }
 
 void ServerResponse::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ServerResponse_voice_5fmessage_2eproto.base);
   message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  status_ = 0;
+  ::memset(&status_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&request_id_) -
+      reinterpret_cast<char*>(&status_)) + sizeof(request_id_));
 }
 
 ServerResponse::~ServerResponse() {
@@ -875,7 +884,9 @@ void ServerResponse::Clear() {
   (void) cached_has_bits;
 
   message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  status_ = 0;
+  ::memset(&status_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&request_id_) -
+      reinterpret_cast<char*>(&status_)) + sizeof(request_id_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -901,6 +912,13 @@ const char* ServerResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           auto str = _internal_mutable_message();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "voicechat.ServerResponse.message"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 request_id = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          request_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -949,6 +967,12 @@ failure:
         2, this->_internal_message(), target);
   }
 
+  // uint32 request_id = 3;
+  if (this->request_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_request_id(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -976,6 +1000,13 @@ size_t ServerResponse::ByteSizeLong() const {
   if (this->status() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_status());
+  }
+
+  // uint32 request_id = 3;
+  if (this->request_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_request_id());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1015,6 +1046,9 @@ void ServerResponse::MergeFrom(const ServerResponse& from) {
   if (from.status() != 0) {
     _internal_set_status(from._internal_status());
   }
+  if (from.request_id() != 0) {
+    _internal_set_request_id(from._internal_request_id());
+  }
 }
 
 void ServerResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1039,7 +1073,12 @@ void ServerResponse::InternalSwap(ServerResponse* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   message_.Swap(&other->message_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  swap(status_, other->status_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ServerResponse, request_id_)
+      + sizeof(ServerResponse::request_id_)
+      - PROTOBUF_FIELD_OFFSET(ServerResponse, status_)>(
+          reinterpret_cast<char*>(&status_),
+          reinterpret_cast<char*>(&other->status_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ServerResponse::GetMetadata() const {

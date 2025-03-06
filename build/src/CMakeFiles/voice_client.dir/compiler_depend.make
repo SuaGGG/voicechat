@@ -350,6 +350,9 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/bits/std_thread.h \
   /usr/include/c++/11/bits/this_thread_sleep.h \
+  /usr/include/c++/11/future \
+  /usr/include/c++/11/condition_variable \
+  /usr/include/c++/11/bits/atomic_futex.h \
   ../include/asio_network.hpp \
   /usr/include/boost/asio.hpp \
   /usr/include/boost/asio/associated_allocator.hpp \
@@ -1085,9 +1088,6 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
   /usr/include/boost/asio/local/stream_protocol.hpp \
   /usr/include/boost/asio/packaged_task.hpp \
   /usr/include/boost/asio/detail/future.hpp \
-  /usr/include/c++/11/future \
-  /usr/include/c++/11/condition_variable \
-  /usr/include/c++/11/bits/atomic_futex.h \
   /usr/include/boost/asio/placeholders.hpp \
   /usr/include/boost/bind/arg.hpp \
   /usr/include/boost/is_placeholder.hpp \
@@ -1583,10 +1583,6 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
 
 /usr/include/boost/predef/language/stdcpp.h:
 
-/usr/include/boost/asio/detail/impl/null_event.ipp:
-
-/usr/include/x86_64-linux-gnu/bits/sigaction.h:
-
 /usr/include/boost/asio/detail/impl/service_registry.hpp:
 
 /usr/include/boost/numeric/conversion/detail/udt_builtin_mixture.hpp:
@@ -1666,10 +1662,6 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
 /usr/include/boost/cerrno.hpp:
 
 /usr/include/google/protobuf/generated_message_reflection.h:
-
-/usr/include/boost/asio/detail/impl/strand_service.ipp:
-
-/usr/include/boost/system/api_config.hpp:
 
 /usr/include/boost/core/enable_if.hpp:
 
@@ -1925,6 +1917,10 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
 
 /usr/include/boost/date_time/gregorian_calendar.hpp:
 
+/usr/include/c++/11/condition_variable:
+
+/usr/include/x86_64-linux-gnu/bits/sigstksz.h:
+
 /usr/include/c++/11/ratio:
 
 /usr/include/boost/config/detail/posix_features.hpp:
@@ -1960,6 +1956,12 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
 /usr/include/stdlib.h:
 
 /usr/include/boost/date_time/locale_config.hpp:
+
+/usr/include/boost/asio/detail/impl/null_event.ipp:
+
+/usr/include/boost/system/api_config.hpp:
+
+/usr/include/boost/asio/detail/impl/strand_service.ipp:
 
 /usr/include/google/protobuf/port.h:
 
@@ -2435,6 +2437,12 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
 
 /usr/include/c++/11/functional:
 
+/usr/include/boost/asio/signal_set.hpp:
+
+/usr/include/c++/11/bits/atomic_futex.h:
+
+/usr/include/c++/11/cstring:
+
 /usr/include/boost/preprocessor/list/detail/fold_right.hpp:
 
 /usr/include/c++/11/ext/string_conversions.h:
@@ -2687,6 +2695,8 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
 
 /usr/include/c++/11/bits/basic_string.tcc:
 
+/usr/include/x86_64-linux-gnu/bits/sigaction.h:
+
 /usr/include/c++/11/debug/debug.h:
 
 /usr/include/c++/11/bits/shared_ptr.h:
@@ -2724,10 +2734,6 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: ../src/client/main.cpp \
 /usr/include/c++/11/bits/unique_lock.h:
 
 /usr/include/boost/system/detail/config.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/sigstksz.h:
-
-/usr/include/c++/11/condition_variable:
 
 /usr/include/boost/asio/detail/posix_event.hpp:
 
@@ -2820,12 +2826,6 @@ proto/voice_message.pb.h:
 /usr/include/boost/asio/traits/set_error_free.hpp:
 
 /usr/include/boost/numeric/conversion/cast.hpp:
-
-/usr/include/c++/11/cstring:
-
-/usr/include/boost/asio/signal_set.hpp:
-
-/usr/include/c++/11/bits/atomic_futex.h:
 
 /usr/include/boost/asio/traits/equality_comparable.hpp:
 

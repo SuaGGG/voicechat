@@ -287,7 +287,9 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: \
  /usr/include/google/protobuf/extension_set.h /usr/include/c++/11/cassert \
  /home/sua/voice_chat/include/audio_interface.hpp \
  /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
- /usr/include/c++/11/bits/this_thread_sleep.h \
+ /usr/include/c++/11/bits/this_thread_sleep.h /usr/include/c++/11/future \
+ /usr/include/c++/11/condition_variable \
+ /usr/include/c++/11/bits/atomic_futex.h \
  /home/sua/voice_chat/include/asio_network.hpp \
  /usr/include/boost/asio.hpp \
  /usr/include/boost/asio/associated_allocator.hpp \
@@ -986,9 +988,7 @@ src/CMakeFiles/voice_client.dir/client/main.cpp.o: \
  /usr/include/boost/asio/local/datagram_protocol.hpp \
  /usr/include/boost/asio/local/stream_protocol.hpp \
  /usr/include/boost/asio/packaged_task.hpp \
- /usr/include/boost/asio/detail/future.hpp /usr/include/c++/11/future \
- /usr/include/c++/11/condition_variable \
- /usr/include/c++/11/bits/atomic_futex.h \
+ /usr/include/boost/asio/detail/future.hpp \
  /usr/include/boost/asio/placeholders.hpp /usr/include/boost/bind/arg.hpp \
  /usr/include/boost/is_placeholder.hpp \
  /usr/include/boost/asio/posix/basic_descriptor.hpp \

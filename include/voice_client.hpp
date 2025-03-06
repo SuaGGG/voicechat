@@ -9,8 +9,10 @@
 #include <vector>
 #include <cstdint>
 #include <iostream>
+#include <atomic>
 #include <thread>
 #include <chrono>
+#include <future>
 #include "asio_network.hpp"
 #include "audio_device.hpp"
 #include "opus_codec.hpp"
@@ -76,9 +78,10 @@ private:
     std::unique_ptr<PortAudioDevice> audioDevice_;
     std::unique_ptr<OpusCodec> audioCodec_;
     
-    // 存储服务器响应的Promise
-    std::shared_ptr<std::promise<ServerResponse>> responsePromise_;
+    // 请求-响应相关
     std::mutex responseMutex_;
+    std::atomic<uint32_t> requestIdCounter_{0};
+    std::unordered_map<uint32_t, std::shared_ptr<std::promise<ServerResponse>>> pendingPromises_;
 };
 
 } // namespace voicechat 

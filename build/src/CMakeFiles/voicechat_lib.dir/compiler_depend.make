@@ -1222,7 +1222,17 @@ src/CMakeFiles/voicechat_lib.dir/asio_network.cpp.o: ../src/asio_network.cpp \
   /usr/include/c++/11/bits/stl_deque.h \
   /usr/include/c++/11/bits/deque.tcc \
   /usr/include/c++/11/bits/stl_queue.h \
-  /usr/include/c++/11/iostream
+  /usr/include/c++/11/iostream \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/locale \
+  /usr/include/c++/11/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/11/bits/locale_conv.h \
+  /usr/include/c++/11/bits/quoted_string.h
 
 src/CMakeFiles/voicechat_lib.dir/audio_device.cpp.o: ../src/audio_device.cpp \
   /usr/include/stdc-predef.h \
@@ -2015,6 +2025,9 @@ src/CMakeFiles/voicechat_lib.dir/voice_client.cpp.o: ../src/voice_client.cpp \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/bits/std_thread.h \
   /usr/include/c++/11/bits/this_thread_sleep.h \
+  /usr/include/c++/11/future \
+  /usr/include/c++/11/condition_variable \
+  /usr/include/c++/11/bits/atomic_futex.h \
   ../include/asio_network.hpp \
   /usr/include/boost/asio.hpp \
   /usr/include/boost/asio/associated_allocator.hpp \
@@ -2750,9 +2763,6 @@ src/CMakeFiles/voicechat_lib.dir/voice_client.cpp.o: ../src/voice_client.cpp \
   /usr/include/boost/asio/local/stream_protocol.hpp \
   /usr/include/boost/asio/packaged_task.hpp \
   /usr/include/boost/asio/detail/future.hpp \
-  /usr/include/c++/11/future \
-  /usr/include/c++/11/condition_variable \
-  /usr/include/c++/11/bits/atomic_futex.h \
   /usr/include/boost/asio/placeholders.hpp \
   /usr/include/boost/bind/arg.hpp \
   /usr/include/boost/is_placeholder.hpp \
@@ -4267,18 +4277,6 @@ src/CMakeFiles/voicechat_lib.dir/voice_server.cpp.o: ../src/voice_server.cpp \
 
 ../src/voice_server.cpp:
 
-/usr/include/c++/11/bits/locale_conv.h:
-
-/usr/include/c++/11/bits/codecvt.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
-
-/usr/include/c++/11/bits/locale_facets_nonio.h:
-
-/usr/include/c++/11/locale:
-
 /usr/include/c++/11/bits/this_thread_sleep.h:
 
 /usr/include/c++/11/thread:
@@ -4370,6 +4368,18 @@ proto/voice_message.pb.h:
 ../include/audio_device.hpp:
 
 ../src/audio_device.cpp:
+
+/usr/include/c++/11/bits/locale_conv.h:
+
+/usr/include/c++/11/bits/codecvt.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.h:
+
+/usr/include/c++/11/locale:
 
 /usr/include/c++/11/bits/deque.tcc:
 

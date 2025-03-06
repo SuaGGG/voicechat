@@ -1,5 +1,6 @@
 #include "asio_network.hpp"
 #include <iostream>
+#include <iomanip>
 
 namespace voicechat {
 
@@ -59,12 +60,24 @@ bool AsioConnection::send(const std::vector<uint8_t>& data) {
   
   // 添加长度头
   uint32_t size = static_cast<uint32_t>(data.size());
-  for (int i = 0; i < HEADER_SIZE; ++i) {
-    packet.push_back(static_cast<uint8_t>((size >> (8 * i)) & 0xFF));
-  }
+  std::cout << "准备发送数据:" << std::endl;
+  std::cout << "- 原始数据大小: " << size << " 字节" << std::endl;
+  
+  // 使用小端序添加长度头
+  packet.push_back(static_cast<uint8_t>(size & 0xFF));
+  packet.push_back(static_cast<uint8_t>((size >> 8) & 0xFF));
+  packet.push_back(static_cast<uint8_t>((size >> 16) & 0xFF));
+  packet.push_back(static_cast<uint8_t>((size >> 24) & 0xFF));
   
   // 添加数据
   packet.insert(packet.end(), data.begin(), data.end());
+  
+  std::cout << "- 完整数据包大小: " << packet.size() << " 字节" << std::endl;
+  std::cout << "- 数据包内容（十六进制）: ";
+  for (const auto& byte : packet) {
+    std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
+  }
+  std::cout << std::dec << std::endl;
   
   // 加入发送队列
   {
@@ -121,51 +134,84 @@ void AsioConnection::doRead() {
     boost::asio::buffer(headerBuffer_),
     [this](const boost::system::error_code& error, std::size_t /*length*/) {
       if (!error) {
-        // 解析数据长度
+        // 解析数据长度（小端序）
         uint32_t dataSize = 0;
-        for (int i = 0; i < HEADER_SIZE; ++i) {
-          dataSize |= (headerBuffer_[i] << (8 * i));
+        dataSize = static_cast<uint32_t>(headerBuffer_[0]) |
+                  (static_cast<uint32_t>(headerBuffer_[1]) << 8) |
+                  (static_cast<uint32_t>(headerBuffer_[2]) << 16) |
+                  (static_cast<uint32_t>(headerBuffer_[3]) << 24);
+        
+        std::cout << "收到消息头部:" << std::endl;
+        std::cout << "- 头部内容（十六进制）: ";
+        for (const auto& byte : headerBuffer_) {
+          std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
         }
+        std::cout << std::dec << std::endl;
+        std::cout << "- 解析出的数据长度: " << dataSize << " 字节" << std::endl;
         
         // 准备接收数据
         readBuffer_.resize(dataSize);
         boost::asio::async_read(socket_,
           boost::asio::buffer(readBuffer_),
-          [this](const boost::system::error_code& error, std::size_t /*length*/) {
+          [this](const boost::system::error_code& error, std::size_t length) {
             if (!error) {
+              std::cout << "成功接收消息体:" << std::endl;
+              std::cout << "- 实际接收大小: " << length << " 字节" << std::endl;
+              std::cout << "- 消息内容（十六进制）: ";
+              for (const auto& byte : readBuffer_) {
+                std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
+              }
+              std::cout << std::dec << std::endl;
+              
               if (messageCallback_) {
                 messageCallback_(readBuffer_);
               }
               doRead(); // 继续读取下一个消息
             } else {
+              std::cerr << "读取消息体失败: " << error.message() << std::endl;
               handleError(error);
             }
           });
       } else {
+        std::cerr << "读取消息头部失败: " << error.message() << std::endl;
         handleError(error);
       }
     });
 }
 
 void AsioConnection::doWrite() {
-  std::lock_guard<std::mutex> lock(mutex_);
-  if (writeQueue_.empty()) {
-    isWriting_ = false;
-    return;
-  }
-  
-  isWriting_ = true;
-  boost::asio::async_write(socket_,
-    boost::asio::buffer(writeQueue_.front()),
-    [this](const boost::system::error_code& error, std::size_t /*length*/) {
-      if (!error) {
+    std::vector<uint8_t> data;
+    {
         std::lock_guard<std::mutex> lock(mutex_);
+        if (writeQueue_.empty()) {
+            isWriting_ = false;
+            return;
+        }
+        
+        isWriting_ = true;
+        data = std::move(writeQueue_.front());
         writeQueue_.pop();
-        doWrite(); // 继续发送下一个消息
-      } else {
-        handleError(error);
-      }
-    });
+    }
+    
+    std::cout << "正在发送数据:" << std::endl;
+    std::cout << "- 数据大小: " << data.size() << " 字节" << std::endl;
+    std::cout << "- 数据内容（十六进制）: ";
+    for (const auto& byte : data) {
+        std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
+    }
+    std::cout << std::dec << std::endl;
+    
+    boost::asio::async_write(socket_,
+        boost::asio::buffer(data),
+        [this, data](const boost::system::error_code& error, std::size_t length) {
+            if (!error) {
+                std::cout << "成功发送数据，大小: " << length << " 字节" << std::endl;
+                doWrite(); // 继续发送下一个消息
+            } else {
+                std::cerr << "发送数据失败: " << error.message() << std::endl;
+                handleError(error);
+            }
+        });
 }
 
 void AsioConnection::handleError(const boost::system::error_code& error) {
@@ -256,19 +302,34 @@ bool AsioServer::sendTo(const std::string& clientId, const std::vector<uint8_t>&
   
   // 添加长度头
   uint32_t size = static_cast<uint32_t>(data.size());
-  for (int i = 0; i < 4; ++i) {
-    packet.push_back(static_cast<uint8_t>((size >> (8 * i)) & 0xFF));
-  }
+  std::cout << "准备发送数据到客户端 " << clientId << ":" << std::endl;
+  std::cout << "- 原始数据大小: " << size << " 字节" << std::endl;
+  
+  // 使用小端序添加长度头
+  packet.push_back(static_cast<uint8_t>(size & 0xFF));
+  packet.push_back(static_cast<uint8_t>((size >> 8) & 0xFF));
+  packet.push_back(static_cast<uint8_t>((size >> 16) & 0xFF));
+  packet.push_back(static_cast<uint8_t>((size >> 24) & 0xFF));
   
   // 添加数据
   packet.insert(packet.end(), data.begin(), data.end());
   
+  std::cout << "- 完整数据包大小: " << packet.size() << " 字节" << std::endl;
+  std::cout << "- 数据包内容（十六进制）: ";
+  for (const auto& byte : packet) {
+    std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
+  }
+  std::cout << std::dec << std::endl;
+  
   // 异步发送
   boost::asio::async_write(*clientSocket,
     boost::asio::buffer(packet),
-    [this, clientId](const boost::system::error_code& error, std::size_t /*length*/) {
+    [this, clientId, size](const boost::system::error_code& error, std::size_t length) {
       if (error) {
+        std::cerr << "发送数据到客户端 " << clientId << " 失败: " << error.message() << std::endl;
         removeClient(clientId);
+      } else {
+        std::cout << "成功发送数据到客户端 " << clientId << "，大小: " << length << " 字节" << std::endl;
       }
     });
   
@@ -340,36 +401,54 @@ void AsioServer::removeClient(const std::string& clientId) {
 void AsioServer::handleClientData(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
                                const std::string& clientId,
                                std::shared_ptr<std::vector<uint8_t>> headerBuffer) {
-  // 解析数据长度
-  uint32_t dataSize = 0;
-  for (int i = 0; i < 4; ++i) {
-    dataSize |= ((*headerBuffer)[i] << (8 * i));
-  }
-  
-  // 准备接收数据
-  auto dataBuffer = std::make_shared<std::vector<uint8_t>>(dataSize);
-  boost::asio::async_read(*socket,
-    boost::asio::buffer(*dataBuffer),
-    [this, socket, clientId, dataBuffer, headerBuffer](const boost::system::error_code& error, std::size_t /*length*/) {
-      if (!error) {
-        if (messageCallback_) {
-          messageCallback_(clientId, *dataBuffer);
-        }
-        
-        // 继续读取下一个消息的头部
-        boost::asio::async_read(*socket,
-          boost::asio::buffer(*headerBuffer),
-          [this, socket, clientId, headerBuffer](const boost::system::error_code& error, std::size_t /*length*/) {
+    // 解析数据长度（小端序）
+    uint32_t dataSize = static_cast<uint32_t>((*headerBuffer)[0]) |
+                      (static_cast<uint32_t>((*headerBuffer)[1]) << 8) |
+                      (static_cast<uint32_t>((*headerBuffer)[2]) << 16) |
+                      (static_cast<uint32_t>((*headerBuffer)[3]) << 24);
+    
+    std::cout << "收到消息头部:" << std::endl;
+    std::cout << "- 头部内容（十六进制）: ";
+    for (const auto& byte : *headerBuffer) {
+        std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
+    }
+    std::cout << std::dec << std::endl;
+    std::cout << "- 解析出的数据长度: " << dataSize << " 字节" << std::endl;
+    
+    // 准备接收数据
+    auto dataBuffer = std::make_shared<std::vector<uint8_t>>(dataSize);
+    boost::asio::async_read(*socket,
+        boost::asio::buffer(*dataBuffer),
+        [this, socket, clientId, dataBuffer, headerBuffer](const boost::system::error_code& error, std::size_t length) {
             if (!error) {
-              handleClientData(socket, clientId, headerBuffer);
+                std::cout << "成功接收消息体:" << std::endl;
+                std::cout << "- 实际接收大小: " << length << " 字节" << std::endl;
+                std::cout << "- 消息内容（十六进制）: ";
+                for (const auto& byte : *dataBuffer) {
+                    std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
+                }
+                std::cout << std::dec << std::endl;
+                
+                if (messageCallback_) {
+                    messageCallback_(clientId, *dataBuffer);
+                }
+                
+                // 继续读取下一个消息的头部
+                boost::asio::async_read(*socket,
+                    boost::asio::buffer(*headerBuffer),
+                    [this, socket, clientId, headerBuffer](const boost::system::error_code& error, std::size_t /*length*/) {
+                        if (!error) {
+                            handleClientData(socket, clientId, headerBuffer);
+                        } else {
+                            std::cerr << "读取消息头部失败: " << error.message() << std::endl;
+                            removeClient(clientId);
+                        }
+                    });
             } else {
-              removeClient(clientId);
+                std::cerr << "读取消息体失败: " << error.message() << std::endl;
+                removeClient(clientId);
             }
-          });
-      } else {
-        removeClient(clientId);
-      }
-    });
+        });
 }
 
 } // namespace voicechat 

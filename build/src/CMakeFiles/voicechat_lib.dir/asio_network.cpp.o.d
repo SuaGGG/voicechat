@@ -1117,4 +1117,12 @@ src/CMakeFiles/voicechat_lib.dir/asio_network.cpp.o: \
  /usr/include/boost/asio/impl/write_at.hpp /usr/include/c++/11/queue \
  /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
  /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_queue.h \
- /usr/include/c++/11/iostream
+ /usr/include/c++/11/iostream /usr/include/c++/11/iomanip \
+ /usr/include/c++/11/locale \
+ /usr/include/c++/11/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/11/bits/locale_conv.h \
+ /usr/include/c++/11/bits/quoted_string.h

@@ -4,35 +4,37 @@ package voicechat;
 
 // 音频数据消息
 message AudioData {
-    bytes audio_payload = 1;      // 编码后的音频数据
-    uint64 timestamp = 2;         // 时间戳
-    string user_id = 3;          // 用户ID
-    uint32 sequence_number = 4;   // 序列号
+    string user_id = 1;
+    string audio_payload = 2;
+    uint64 timestamp = 3;
+    uint32 sequence_number = 4;
 }
 
 // 控制消息
 message ControlMessage {
     enum MessageType {
-        JOIN = 0;        // 加入房间
-        LEAVE = 1;       // 离开房间
-        MUTE = 2;        // 静音
-        UNMUTE = 3;      // 取消静音
+        UNKNOWN = 0;
+        JOIN = 1;    // 加入房间
+        LEAVE = 2;   // 离开房间
+        MUTE = 3;    // 静音
         LIST_ROOMS = 4;  // 获取房间列表
     }
     
     MessageType type = 1;
     string user_id = 2;
     string room_id = 3;
-    string message = 4;
+    uint32 request_id = 4;  // 请求ID，用于匹配响应
 }
 
 // 服务器响应消息
 message ServerResponse {
     enum Status {
-        SUCCESS = 0;
-        ERROR = 1;
+        UNKNOWN = 0;
+        SUCCESS = 1;
+        ERROR = 2;
     }
     
     Status status = 1;
     string message = 2;
+    uint32 request_id = 3;  // 对应请求的ID
 } 
