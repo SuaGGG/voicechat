@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
-project(VoiceChat VERSION 1.0)
+cmake_minimum_required(VERSION 3.16)
+project(voice_chat VERSION 1.0.0 LANGUAGES CXX)
 
 # 设置C++标准
 set(CMAKE_CXX_STANDARD 17)
@@ -21,6 +21,7 @@ endif()
 # 查找依赖包
 find_package(Boost REQUIRED COMPONENTS system thread)
 find_package(Protobuf REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
 
 # 查找 PortAudio 库和头文件
 find_library(PORTAUDIO_LIBRARIES
@@ -66,6 +67,7 @@ include_directories(
 # 添加子目录
 add_subdirectory(proto)
 add_subdirectory(src)
+add_subdirectory(gui)
 
 # 打印配置信息
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")

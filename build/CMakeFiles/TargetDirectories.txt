@@ -20,3 +20,11 @@
 /home/sua/voice_chat/build/src/CMakeFiles/install.dir
 /home/sua/voice_chat/build/src/CMakeFiles/install/local.dir
 /home/sua/voice_chat/build/src/CMakeFiles/install/strip.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/voice_chat_qt.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/edit_cache.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/rebuild_cache.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/list_install_components.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/install.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/install/local.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/install/strip.dir
+/home/sua/voice_chat/build/gui/CMakeFiles/voice_chat_qt_autogen.dir

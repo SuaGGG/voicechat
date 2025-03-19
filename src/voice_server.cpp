@@ -201,11 +201,16 @@ void VoiceServer::handleControlMessage(const std::string& clientId, const voicec
             
             // 构建房间列表响应
             std::ostringstream oss;
-            for (const auto& [roomId, participants] : rooms_) {
+            for (const auto& [roomId, participants] : rooms_) { // 小于1000房间可用，过大效率低下
                 if (!oss.str().empty()) {
                     oss << ";"; // 使用分号分隔多个房间
                 }
-                oss << roomId << ":" << participants.size();
+                oss << roomId << ":";
+                // 传入房间用户名
+                for (const auto& clientId : participants) {
+                    oss << clientId << ":";
+                }
+                oss << ".";
                 std::cout << "添加房间到列表: " << roomId << " (在线人数: " << participants.size() << ")" << std::endl;
             }
             

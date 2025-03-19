@@ -25,6 +25,10 @@ public:
     
     // 设置音频回调
     virtual void setCallback(AudioCallback callback) = 0;
+
+    // 音量控制方法
+    virtual void setVolume(float volume) = 0;
+    virtual float getVolume() const = 0;
 };
 
 // 音频编解码器接口

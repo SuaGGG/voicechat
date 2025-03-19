@@ -213,6 +213,32 @@ voice_client/fast:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/voice_client.dir/build.make src/CMakeFiles/voice_client.dir/build
 .PHONY : voice_client/fast
 
+#=============================================================================
+# Target rules for targets named voice_chat_qt
+
+# Build rule for target.
+voice_chat_qt: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 voice_chat_qt
+.PHONY : voice_chat_qt
+
+# fast build rule for target.
+voice_chat_qt/fast:
+	$(MAKE) $(MAKESILENT) -f gui/CMakeFiles/voice_chat_qt.dir/build.make gui/CMakeFiles/voice_chat_qt.dir/build
+.PHONY : voice_chat_qt/fast
+
+#=============================================================================
+# Target rules for targets named voice_chat_qt_autogen
+
+# Build rule for target.
+voice_chat_qt_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 voice_chat_qt_autogen
+.PHONY : voice_chat_qt_autogen
+
+# fast build rule for target.
+voice_chat_qt_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f gui/CMakeFiles/voice_chat_qt_autogen.dir/build.make gui/CMakeFiles/voice_chat_qt_autogen.dir/build
+.PHONY : voice_chat_qt_autogen/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -225,6 +251,8 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... voice_chat_qt_autogen"
+	@echo "... voice_chat_qt"
 	@echo "... voice_client"
 	@echo "... voice_server"
 	@echo "... voicechat_lib"

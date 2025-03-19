@@ -1,2 +1,3 @@
 # Hashes of file build rules.
+70350bf17a8770258bb202bf9fa5478b gui/CMakeFiles/voice_chat_qt_autogen
 2fc1ede3d7916a3df570a44b72ce0e14 proto/voice_message.pb.h

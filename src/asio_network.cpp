@@ -140,28 +140,12 @@ void AsioConnection::doRead() {
                   (static_cast<uint32_t>(headerBuffer_[1]) << 8) |
                   (static_cast<uint32_t>(headerBuffer_[2]) << 16) |
                   (static_cast<uint32_t>(headerBuffer_[3]) << 24);
-        
-        std::cout << "收到消息头部:" << std::endl;
-        std::cout << "- 头部内容（十六进制）: ";
-        for (const auto& byte : headerBuffer_) {
-          std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
-        }
-        std::cout << std::dec << std::endl;
-        std::cout << "- 解析出的数据长度: " << dataSize << " 字节" << std::endl;
-        
         // 准备接收数据
         readBuffer_.resize(dataSize);
         boost::asio::async_read(socket_,
           boost::asio::buffer(readBuffer_),
           [this](const boost::system::error_code& error, std::size_t length) {
             if (!error) {
-              std::cout << "成功接收消息体:" << std::endl;
-              std::cout << "- 实际接收大小: " << length << " 字节" << std::endl;
-              std::cout << "- 消息内容（十六进制）: ";
-              for (const auto& byte : readBuffer_) {
-                std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
-              }
-              std::cout << std::dec << std::endl;
               
               if (messageCallback_) {
                 messageCallback_(readBuffer_);
@@ -192,14 +176,6 @@ void AsioConnection::doWrite() {
         data = std::move(writeQueue_.front());
         writeQueue_.pop();
     }
-    
-    std::cout << "正在发送数据:" << std::endl;
-    std::cout << "- 数据大小: " << data.size() << " 字节" << std::endl;
-    std::cout << "- 数据内容（十六进制）: ";
-    for (const auto& byte : data) {
-        std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
-    }
-    std::cout << std::dec << std::endl;
     
     boost::asio::async_write(socket_,
         boost::asio::buffer(data),
@@ -313,13 +289,6 @@ bool AsioServer::sendTo(const std::string& clientId, const std::vector<uint8_t>&
   
   // 添加数据
   packet.insert(packet.end(), data.begin(), data.end());
-  
-  std::cout << "- 完整数据包大小: " << packet.size() << " 字节" << std::endl;
-  std::cout << "- 数据包内容（十六进制）: ";
-  for (const auto& byte : packet) {
-    std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
-  }
-  std::cout << std::dec << std::endl;
   
   // 异步发送
   boost::asio::async_write(*clientSocket,

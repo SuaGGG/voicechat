@@ -1,22 +1,20 @@
 #pragma once
 
-#include "network_interface.hpp"
-#include "voice_message.pb.h"
 #include "audio_interface.hpp"
-#include <memory>
-#include <string>
-#include <mutex>
-#include <vector>
-#include <cstdint>
-#include <iostream>
-#include <atomic>
-#include <thread>
-#include <chrono>
-#include <future>
+#include "network_interface.hpp"
 #include "asio_network.hpp"
 #include "audio_device.hpp"
 #include "opus_codec.hpp"
+#include "voice_message.pb.h"
+
+#include <string>
+#include <memory>
+#include <optional>
 #include <unordered_map>
+#include <mutex>
+#include <atomic>
+#include <future>
+#include <vector>
 
 namespace voicechat {
 
@@ -24,63 +22,56 @@ class VoiceClient {
 public:
     explicit VoiceClient(const std::string& userId);
     ~VoiceClient();
-
-    // 连接到服务器
-    bool connect(const std::string& host, uint16_t port);
     
-    // 断开连接
+    bool connect(const std::string& host, uint16_t port);
     void disconnect();
     
-    // 加入房间
     bool joinRoom(const std::string& roomId);
-    
-    // 离开房间
     bool leaveRoom();
     
-    // 静音/取消静音
     void setMuted(bool muted);
     bool isMuted() const;
-
-    // 获取用户ID
-    const std::string& getUserId() const { return userId_; }
     
-    // 获取当前房间ID
-    const std::string& getCurrentRoomId() const { return currentRoomId_; }
+    std::unordered_map<std::string, std::vector<std::string>> getAvailableRooms();
+    
+    std::optional<std::string> getCurrentRoomId() const;
 
-    // 获取可用频道列表
-    std::unordered_map<std::string, size_t> getAvailableRooms();
-
+    // 音频设备控制方法
+    std::vector<AudioDeviceInfo> getAudioInputDevices() const;
+    std::vector<AudioDeviceInfo> getAudioOutputDevices() const;
+    bool setAudioInputDevice(int deviceIndex);
+    bool setAudioOutputDevice(int deviceIndex);
+    void setInputVolume(float volume);
+    void setOutputVolume(float volume);
+    float getInputVolume() const;
+    float getOutputVolume() const;
+    
+    // 获取音频设备实例
+    PortAudioDevice* getInputDevice() const;
+    PortAudioDevice* getOutputDevice() const;
+    
 private:
-    // 处理来自服务器的消息
     void onMessage(const std::vector<uint8_t>& data);
-    
-    // 处理音频数据
-    void handleAudioData(const AudioData& audioData);
-    
-    // 处理服务器响应
-    void handleServerResponse(const ServerResponse& response);
-    
-    // 音频回调
-    void onAudioData(const std::vector<uint8_t>& audioData);
-
-    // 请求并等待服务器响应（带返回值的版本）
+    bool initAudio();
     bool sendRequest(const ControlMessage& request, ServerResponse& response);
+    void handleAudioData(const AudioData& audioData);
+    void handleServerResponse(const ServerResponse& response);
+    void onAudioData(const std::vector<uint8_t>& audioData);
     
-    // 请求并等待服务器响应（无返回值的版本）
-    void sendRequest(const ControlMessage& request);
-
     std::string userId_;
-    std::string currentRoomId_;
+    std::unique_ptr<AsioConnection> connection_;
+    std::unique_ptr<IAudioDevice> audioDevice_;
+    std::unique_ptr<IAudioCodec> audioCodec_;
+    std::optional<std::string> currentRoomId_;
     bool muted_;
     bool running_;
-    mutable std::mutex mutex_;
-    std::unique_ptr<AsioConnection> connection_;
-    std::unique_ptr<PortAudioDevice> audioDevice_;
-    std::unique_ptr<OpusCodec> audioCodec_;
     
-    // 请求-响应相关
+    // 虚拟音频模式标志
+    bool useVirtualAudio_ = false;
+    
+    // 用于请求-响应模式
+    std::atomic<uint32_t> requestIdCounter_{1};
     std::mutex responseMutex_;
-    std::atomic<uint32_t> requestIdCounter_{0};
     std::unordered_map<uint32_t, std::shared_ptr<std::promise<ServerResponse>>> pendingPromises_;
 };
 
